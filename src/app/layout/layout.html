@@ -6,7 +6,7 @@
   </div>
   <div
     class="w-full flex py-3 px-3 my-3 justify-between items-center border-gray-300"
-    style="border-width: 1px"
+    style="border-width: 1px;"
   >
     <i class="pi pi-bars text-gray-500"></i>
     <div class="flex justify-between gap-5">
@@ -16,14 +16,14 @@
       </div>
       <div
         class="flex items-center gap-2 p-1 rounded-lg"
-        style="border-width: 1px"
+        style="border-width: 1px;"
       >
         <i class="pi pi-wifi text-gray-500"></i>
         <div class="text-gray-500 text-xs poppins-regular">Conectado</div>
       </div>
       <div
         class="flex items-center gap-2 p-1 rounded-lg"
-        style="border-width: 1px"
+        style="border-width: 1px;"
       >
         <i class="pi pi-mobile text-gray-500"></i>
         <div class="text-gray-500 text-xs poppins-regular">Bluetooth</div>
@@ -48,40 +48,86 @@
     </div>
     <div class="grid gap-4 my-4 grid-cols-2">
       <div
-        class="h-12 flex justify-between border-gray-300 w-full p-6 rounded-xl"
-        style="border-width: 1px"
-      ></div>
+        class="flex flex-col justify-between border-gray-300 gap-3 w-full p-4 rounded-xl"
+        style="border-width: 1px;"
+      >
+        <div class="flex w-full items-center justify-between">
+          <i class="pi pi-sun text-yellow-500"></i>
+          <div class="p-1 rounded-lg" style="border-width: 1px;">
+            <div class="text-gray-500 text-xs poppins-regular">Confortable</div>
+          </div>
+        </div>
+        <div class="poppins-regular text-xs text-gray-500">Temperatura</div>
+        <div class="poppins-regular text-xl text-gray-800">22°C</div>
+      </div>
       <div
-        class="h-12 flex justify-between border-gray-300 w-full p-6 rounded-xl"
-        style="border-width: 1px"
-      ></div>
-      <div
-        class="h-12 flex justify-between border-gray-300 w-full p-6 rounded-xl"
-        style="border-width: 1px"
-      ></div>
-      <div
-        class="h-12 flex justify-between border-gray-300 w-full p-6 rounded-xl"
-        style="border-width: 1px"
-      ></div>
+        class="flex flex-col justify-between border-gray-300 gap-3 w-full p-4 rounded-xl"
+        style="border-width: 1px;"
+      >
+        <div class="flex w-full items-center justify-between">
+          <i class="pi pi-cloud text-orange-500"></i>
+          <div
+            class="flex items-center gap-2 p-1 rounded-lg"
+            style="border-width: 1px;"
+          >
+            <div class="text-gray-500 text-xs poppins-regular">Conectado</div>
+          </div>
+        </div>
+        <div class="poppins-regular text-xs text-gray-500">Humedad</div>
+        <div class="poppins-regular text-xl text-gray-800">50%</div>
+      </div>
     </div>
     <div class="poppins-regular text-sm">Controles Rápidos</div>
+
     <div class="grid gap-4 my-4 grid-cols-2">
       <div
-        class="h-12 flex justify-between border-gray-300 w-full p-6 rounded-xl"
-        style="border-width: 1px"
-      ></div>
+        class="flex flex-col justify-between items-center border-gray-300 gap-3 w-full p-4 rounded-xl"
+        style="border-width: 1px;"
+      >
+        <i class="pi pi-lightbulb text-3xl text-gray-500"></i>
+        <div class="poppins-regular text-sm text-gray-500">Luces de casa</div>
+        <div class="p-1 rounded-lg" style="border-width: 1px;">
+          <div class="text-gray-500 text-xs poppins-regular">Encedido</div>
+        </div>
+      </div>
       <div
-        class="h-12 flex justify-between border-gray-300 w-full p-6 rounded-xl"
-        style="border-width: 1px"
-      ></div>
+        class="flex flex-col justify-between items-center border-gray-300 gap-3 w-full p-4 rounded-xl"
+        style="border-width: 1px;"
+      >
+        <i class="pi pi-lightbulb text-3xl text-gray-500"></i>
+        <div class="poppins-regular text-sm text-gray-500">Luces de garaje</div>
+        <div class="p-1 rounded-lg" style="border-width: 1px;">
+          <div class="text-gray-500 text-xs poppins-regular">Encedido</div>
+        </div>
+      </div>
       <div
-        class="h-12 flex justify-between border-gray-300 w-full p-6 rounded-xl"
-        style="border-width: 1px"
-      ></div>
+        class="flex flex-col justify-between items-center border-gray-300 gap-3 w-full p-4 rounded-xl"
+        style="border-width: 1px;"
+      >
+        <i class="pi pi-warehouse text-3xl text-gray-500"></i>
+        <div class="poppins-regular text-sm text-gray-500">Garaje</div>
+        <div class="p-1 rounded-lg" style="border-width: 1px;">
+          <div class="text-gray-500 text-xs poppins-regular">Abierto</div>
+        </div>
+      </div>
       <div
-        class="h-12 flex justify-between border-gray-300 w-full p-6 rounded-xl"
-        style="border-width: 1px"
-      ></div>
+        class="flex flex-col justify-between items-center border-gray-300 gap-3 w-full p-4 rounded-xl"
+        style="border-width: 1px;"
+      >
+        <i class="pi pi-bell text-3xl text-gray-500"></i>
+        <div class="poppins-regular text-sm text-gray-500">Alarma</div>
+        <div class="p-1 rounded-lg" style="border-width: 1px;">
+          <div class="text-gray-500 text-xs poppins-regular">Encendido</div>
+        </div>
+      </div>
     </div>
+    <!-- <p-button
+      label="Mensaje al display"
+      [outlined]="true"
+      styleClass="w-full"
+      icon="pi pi-desktop"
+      severity="contrast"
+      iconPos="top"
+    /> -->
   </div>
 </div>
