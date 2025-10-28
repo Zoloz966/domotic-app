@@ -8,11 +8,19 @@
     class="w-full flex py-3 px-3 my-3 justify-between items-center border-gray-300"
     style="border-width: 1px;"
   >
-    <i class="pi pi-bars text-gray-500"></i>
+    <p-button
+      [text]="true"
+      severity="contrast"
+      icon="pi pi-bars text-gray-500"
+      [rounded]="true"
+      styleClass=""
+    />
     <div class="flex justify-between gap-5">
       <div class="flex items-center gap-2">
         <i class="pi pi-clock text-gray-500"></i>
-        <div class="text-gray-500 text-sm poppins-regular">20:15</div>
+        <div class="text-gray-500 text-sm poppins-regular">
+          {{ currentTime | date:'HH:mm':'GMT-4' }}
+        </div>
       </div>
       <div
         class="flex items-center gap-2 p-1 rounded-lg"
@@ -35,9 +43,9 @@
       class="flex justify-between bg-gradient-to-r from-blue-400 to-purple-500 w-full p-6 rounded-xl"
     >
       <div class="flex flex-col gap-2">
-        <div class="text-white poppins-medium text-xl">20:15</div>
+        <div class="text-white poppins-medium text-xl"> {{ currentTime | date:'HH:mm':'GMT-4' }}</div>
         <div class="text-white poppins-regular text-sm">
-          Lunes, 27 de Octubre de 2025
+           {{ currentTime | date:'EEEE, d \'de\' MMMM \'de\' y':'GMT-4':'es-BO'  }}
         </div>
       </div>
       <div class="flex flex-col gap-1 items-center">
