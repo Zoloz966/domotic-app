@@ -2,11 +2,11 @@
   <div
     class="w-full flex poppins-medium items-center text-xl text-gray-700 px-3 py-4"
   >
-    Buenos Dias, Rodrigo
+    ¡Buenos días! Bienvenido a casa 🏡
   </div>
   <div
     class="w-full flex py-3 px-3 my-3 justify-between items-center border-gray-300"
-    style="border-width: 1px;"
+    style="border-width: 1px"
   >
     <p-button
       [text]="true"
@@ -23,19 +23,19 @@
         </div>
       </div>
       <div
-        class="flex items-center gap-2 p-1 rounded-lg"
-        style="border-width: 1px;"
+        class="flex items-center gap-2 p-1 rounded-lg hover:cursor-pointer"
+        style="border-width: 1px"
       >
         <i class="pi pi-wifi text-gray-500"></i>
         <div class="text-gray-500 text-xs poppins-regular">Conectado</div>
       </div>
-      <div
+      <!-- <div
         class="flex items-center gap-2 p-1 rounded-lg"
         style="border-width: 1px;"
       >
         <i class="pi pi-mobile text-gray-500"></i>
         <div class="text-gray-500 text-xs poppins-regular">Bluetooth</div>
-      </div>
+      </div> -->
     </div>
   </div>
   <div class="px-3 flex flex-col w-full">
@@ -43,25 +43,33 @@
       class="flex justify-between bg-gradient-to-r from-blue-400 to-purple-500 w-full p-6 rounded-xl"
     >
       <div class="flex flex-col gap-2">
-        <div class="text-white poppins-medium text-xl"> {{ currentTime | date:'HH:mm':'GMT-4' }}</div>
+        <div class="text-white poppins-medium text-xl">
+          {{ currentTime | date:'HH:mm':'GMT-4' }}
+        </div>
         <div class="text-white poppins-regular text-sm">
-           {{ currentTime | date:'EEEE, d \'de\' MMMM \'de\' y':'GMT-4':'es-BO'  }}
+          {{ currentTime | date:'EEEE, d \'de\' MMMM \'de\' y':'GMT-4':'es-BO'
+          }}
         </div>
       </div>
       <div class="flex flex-col gap-1 items-center">
-        <i class="pi pi-sun text-white text-xl"></i>
-        <div class="text-white poppins-light text-xs">Soleado</div>
-        <div class="text-white poppins-regular text-xs">25° C</div>
+        <i [class]="iconoClima + ' text-white text-xl'"></i>
+        <div class="text-white poppins-light text-xs">{{ estadoClima }}</div>
+        <div class="text-white poppins-regular text-xs">
+          {{ temperatura }}° C
+        </div>
       </div>
     </div>
+
+    <div class="poppins-regular text-sm mt-4">Monitor del hogar:</div>
+
     <div class="grid gap-4 my-4 grid-cols-2">
       <div
         class="flex flex-col justify-between border-gray-300 gap-3 w-full p-4 rounded-xl"
-        style="border-width: 1px;"
+        style="border-width: 1px"
       >
         <div class="flex w-full items-center justify-between">
           <i class="pi pi-sun text-yellow-500"></i>
-          <div class="p-1 rounded-lg" style="border-width: 1px;">
+          <div class="p-1 rounded-lg" style="border-width: 1px">
             <div class="text-gray-500 text-xs poppins-regular">Confortable</div>
           </div>
         </div>
@@ -70,13 +78,13 @@
       </div>
       <div
         class="flex flex-col justify-between border-gray-300 gap-3 w-full p-4 rounded-xl"
-        style="border-width: 1px;"
+        style="border-width: 1px"
       >
         <div class="flex w-full items-center justify-between">
           <i class="pi pi-cloud text-orange-500"></i>
           <div
             class="flex items-center gap-2 p-1 rounded-lg"
-            style="border-width: 1px;"
+            style="border-width: 1px"
           >
             <div class="text-gray-500 text-xs poppins-regular">Conectado</div>
           </div>
@@ -85,50 +93,182 @@
         <div class="poppins-regular text-xl text-gray-800">50%</div>
       </div>
     </div>
-    <div class="poppins-regular text-sm">Controles Rápidos</div>
+    
+    <div class="poppins-regular text-sm">Controles Rápidos:</div>
 
     <div class="grid gap-4 my-4 grid-cols-2">
+      <!-- Luces de casa -->
       <div
-        class="flex flex-col justify-between items-center border-gray-300 gap-3 w-full p-4 rounded-xl"
-        style="border-width: 1px;"
+        (click)="toggleLucesCasa()"
+        [ngClass]="{
+      'bg-gray-900 border-gray-100': lucesCasa,
+      'bg-white border-gray-300 hover:bg-gray-50': !lucesCasa
+    }"
+        class="flex flex-col justify-between items-center hover:cursor-pointer gap-3 w-full p-4 rounded-xl transition-all duration-200"
+        style="border-width: 1px"
       >
-        <i class="pi pi-lightbulb text-3xl text-gray-500"></i>
-        <div class="poppins-regular text-sm text-gray-500">Luces de casa</div>
-        <div class="p-1 rounded-lg" style="border-width: 1px;">
-          <div class="text-gray-500 text-xs poppins-regular">Encedido</div>
+        <i
+          [class]="
+        'pi pi-lightbulb text-3xl ' +
+        (lucesCasa ? 'text-white' : 'text-gray-500')
+      "
+        ></i>
+        <div
+          [class]="
+        'poppins-regular text-sm ' +
+        (lucesCasa ? 'text-white' : 'text-gray-500')
+      "
+        >
+          Luces de casa
+        </div>
+        <div
+          class="p-1 rounded-lg"
+          [ngClass]="{
+        'bg-white': lucesCasa,
+        'border-gray-300': !lucesCasa
+      }"
+          style="border-width: 1px"
+        >
+          <div
+            class="text-xs poppins-regular"
+            [class]="
+          lucesCasa ? 'text-gray-700 poppins-semibold' : 'text-gray-500'
+        "
+          >
+            {{ lucesCasa ? 'Encendido' : 'Apagado' }}
+          </div>
         </div>
       </div>
+
+      <!-- Luces de garaje -->
       <div
-        class="flex flex-col justify-between items-center border-gray-300 gap-3 w-full p-4 rounded-xl"
-        style="border-width: 1px;"
+        (click)="toggleLucesGaraje()"
+        [ngClass]="{
+      'bg-gray-900 border-gray-100': lucesGaraje,
+      'bg-white border-gray-300 hover:bg-gray-50': !lucesGaraje
+    }"
+        class="flex flex-col justify-between items-center hover:cursor-pointer gap-3 w-full p-4 rounded-xl transition-all duration-200"
+        style="border-width: 1px"
       >
-        <i class="pi pi-lightbulb text-3xl text-gray-500"></i>
-        <div class="poppins-regular text-sm text-gray-500">Luces de garaje</div>
-        <div class="p-1 rounded-lg" style="border-width: 1px;">
-          <div class="text-gray-500 text-xs poppins-regular">Encedido</div>
+        <i
+          [class]="
+        'pi pi-lightbulb text-3xl ' +
+        (lucesGaraje ? 'text-white' : 'text-gray-500')
+      "
+        ></i>
+        <div
+          [class]="
+        'poppins-regular text-sm ' +
+        (lucesGaraje ? 'text-white' : 'text-gray-500')
+      "
+        >
+          Luces de garaje
+        </div>
+        <div
+          class="p-1 rounded-lg"
+          [ngClass]="{
+        'bg-white': lucesGaraje,
+        'border-gray-300': !lucesGaraje
+      }"
+          style="border-width: 1px"
+        >
+          <div
+            class="text-xs poppins-regular"
+            [class]="
+          lucesGaraje ? 'text-gray-700 poppins-semibold' : 'text-gray-500'
+        "
+          >
+            {{ lucesGaraje ? 'Encendido' : 'Apagado' }}
+          </div>
         </div>
       </div>
+
+      <!-- Garaje -->
       <div
-        class="flex flex-col justify-between items-center border-gray-300 gap-3 w-full p-4 rounded-xl"
-        style="border-width: 1px;"
+        (click)="toggleGaraje()"
+        [ngClass]="{
+      'bg-gray-900 border-gray-100': garajeAbierto,
+      'bg-white border-gray-300 hover:bg-gray-50': !garajeAbierto
+    }"
+        class="flex flex-col justify-between items-center hover:cursor-pointer gap-3 w-full p-4 rounded-xl transition-all duration-200"
+        style="border-width: 1px"
       >
-        <i class="pi pi-warehouse text-3xl text-gray-500"></i>
-        <div class="poppins-regular text-sm text-gray-500">Garaje</div>
-        <div class="p-1 rounded-lg" style="border-width: 1px;">
-          <div class="text-gray-500 text-xs poppins-regular">Abierto</div>
+        <i
+          [class]="
+        'pi pi-warehouse text-3xl ' +
+        (garajeAbierto ? 'text-white' : 'text-gray-500')
+      "
+        ></i>
+        <div
+          [class]="
+        'poppins-regular text-sm ' +
+        (garajeAbierto ? 'text-white' : 'text-gray-500')
+      "
+        >
+          Garaje
+        </div>
+        <div
+          class="p-1 rounded-lg"
+          [ngClass]="{
+        'bg-white': garajeAbierto,
+        'border-gray-300': !garajeAbierto
+      }"
+          style="border-width: 1px"
+        >
+          <div
+            class="text-xs poppins-regular"
+            [class]="
+          garajeAbierto ? 'text-gray-700 poppins-semibold' : 'text-gray-500'
+        "
+          >
+            {{ garajeAbierto ? 'Abierto' : 'Cerrado' }}
+          </div>
         </div>
       </div>
+
+      <!-- Alarma -->
       <div
-        class="flex flex-col justify-between items-center border-gray-300 gap-3 w-full p-4 rounded-xl"
-        style="border-width: 1px;"
+        (click)="toggleAlarma()"
+        [ngClass]="{
+      'bg-gray-900 border-gray-100': alarmaActiva,
+      'bg-white border-gray-300 hover:bg-gray-50': !alarmaActiva
+    }"
+        class="flex flex-col justify-between items-center hover:cursor-pointer gap-3 w-full p-4 rounded-xl transition-all duration-200"
+        style="border-width: 1px"
       >
-        <i class="pi pi-bell text-3xl text-gray-500"></i>
-        <div class="poppins-regular text-sm text-gray-500">Alarma</div>
-        <div class="p-1 rounded-lg" style="border-width: 1px;">
-          <div class="text-gray-500 text-xs poppins-regular">Encendido</div>
+        <i
+          [class]="
+        'pi pi-bell text-3xl ' + (alarmaActiva ? 'text-white' : 'text-gray-500')
+      "
+        ></i>
+        <div
+          [class]="
+        'poppins-regular text-sm ' +
+        (alarmaActiva ? 'text-white' : 'text-gray-500')
+      "
+        >
+          Alarma
+        </div>
+        <div
+          class="p-1 rounded-lg"
+          [ngClass]="{
+        'bg-white': alarmaActiva,
+        'border-gray-300': !alarmaActiva
+      }"
+          style="border-width: 1px"
+        >
+          <div
+            class="text-xs poppins-regular"
+            [class]="
+          alarmaActiva ? 'text-gray-700 poppins-semibold' : 'text-gray-500'
+        "
+          >
+            {{ alarmaActiva ? 'Encendido' : 'Apagado' }}
+          </div>
         </div>
       </div>
     </div>
+
     <!-- <p-button
       label="Mensaje al display"
       [outlined]="true"
