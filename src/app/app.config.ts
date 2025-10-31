@@ -1,7 +1,7 @@
 import {
   ApplicationConfig,
   importProvidersFrom,
-  LOCALE_ID,
+  LOCALE_ID, isDevMode,
 } from '@angular/core';
 import {
   RouterModule,
@@ -25,6 +25,7 @@ import { MyPreset } from './presets/primarypreset';
 
 import localeEsBO from '@angular/common/locales/es-BO';
 import { registerLocaleData } from '@angular/common';
+import { provideServiceWorker } from '@angular/service-worker';
 registerLocaleData(localeEsBO);
 
 export const appConfig: ApplicationConfig = {
@@ -55,6 +56,9 @@ export const appConfig: ApplicationConfig = {
       BrowserModule,
       RouterModule,
       BrowserAnimationsModule
-    ),
+    ), provideServiceWorker('ngsw-worker.js', {
+            enabled: !isDevMode(),
+            registrationStrategy: 'registerWhenStable:30000'
+          }),
   ],
 };
