@@ -53,7 +53,9 @@
       </div>
       <div class="flex flex-col gap-1 items-center">
         <i [class]="iconoClima + ' text-white text-xl'"></i>
-        <div class="text-white poppins-light text-xs text-center">{{ estadoClima }}</div>
+        <div class="text-white poppins-light text-xs text-center">
+          {{ estadoClima }}
+        </div>
         <div class="text-white poppins-regular text-xs">
           {{ temperatura }}° C
         </div>
@@ -74,7 +76,7 @@
           </div>
         </div>
         <div class="poppins-regular text-xs text-gray-500">Temperatura</div>
-        <div class="poppins-regular text-xl text-gray-800">22°C</div>
+        <div class="poppins-regular text-xl text-gray-800">{{ temperaturaSensor }} °C</div>
       </div>
       <div
         class="flex flex-col justify-between border-gray-300 gap-3 w-full p-4 rounded-xl"
@@ -90,15 +92,27 @@
           </div>
         </div>
         <div class="poppins-regular text-xs text-gray-500">Humedad</div>
-        <div class="poppins-regular text-xl text-gray-800">50%</div>
+        <div class="poppins-regular text-xl text-gray-800">{{ humedadSensor }}%</div>
       </div>
     </div>
-    
+
     <div class="poppins-regular text-sm">Controles Rápidos:</div>
 
-    <div class="grid gap-4 my-4 grid-cols-2">
+    <div class="grid gap-4 my-4 grid-cols-1">
+      <!-- Ayudame a crear un boton con el mismo diseño del boton de abajo que sirava para abrir la puerta de casa ademas de ello este boton no debe tener el toggle que el cambie de color solo sea una animacion al apretar el boton -->
+      <p-button
+        [loading]="loadingDoor"
+        label="Abrir Puerta de Casa"
+        (click)="openDoor()"
+        severity="secondary"
+        [outlined]="true"
+        styleClass="w-full"
+        iconPos="top"
+        icon="pi pi-lock text-3xl"
+      />
+
       <!-- Luces de casa -->
-      <div
+      <!-- <div
         (click)="toggleLucesCasa()"
         [ngClass]="{
       'bg-gray-900 border-gray-100': lucesCasa,
@@ -109,7 +123,7 @@
       >
         <i
           [class]="
-        'pi pi-lightbulb text-3xl ' +
+        'pi pi-home text-3xl ' +
         (lucesCasa ? 'text-white' : 'text-gray-500')
       "
         ></i>
@@ -119,7 +133,7 @@
         (lucesCasa ? 'text-white' : 'text-gray-500')
       "
         >
-          Luces de casa
+          Abrir Puerta de Casa
         </div>
         <div
           class="p-1 rounded-lg"
@@ -138,10 +152,10 @@
             {{ lucesCasa ? 'Encendido' : 'Apagado' }}
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Luces de garaje -->
-      <div
+      <!-- <div
         (click)="toggleLucesGaraje()"
         [ngClass]="{
       'bg-gray-900 border-gray-100': lucesGaraje,
@@ -181,10 +195,10 @@
             {{ lucesGaraje ? 'Encendido' : 'Apagado' }}
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Garaje -->
-      <div
+      <!-- <div
         (click)="toggleGaraje()"
         [ngClass]="{
       'bg-gray-900 border-gray-100': garajeAbierto,
@@ -224,10 +238,10 @@
             {{ garajeAbierto ? 'Abierto' : 'Cerrado' }}
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Alarma -->
-      <div
+      <!-- <div
         (click)="toggleAlarma()"
         [ngClass]="{
       'bg-gray-900 border-gray-100': alarmaActiva,
@@ -266,7 +280,7 @@
             {{ alarmaActiva ? 'Encendido' : 'Apagado' }}
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <!-- <p-button
@@ -279,3 +293,4 @@
     /> -->
   </div>
 </div>
+ <p-toast position="top-center"/>
