@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { WeatherService } from '@services/weather.service';
 import { Esp32Service } from '@services/esp32.service';
 import { MessageService } from 'primeng/api';
+import { ThemeService } from '@services/theme.service';
 
 @Component({
   selector: 'app-layout',
@@ -15,7 +16,11 @@ import { MessageService } from 'primeng/api';
 export default class Layout implements OnInit {
   public weatherService = inject(WeatherService);
   public messageService = inject(MessageService);
+  public themeService = inject(ThemeService);
   public esp32Service = inject(Esp32Service);
+
+  public isConnected: boolean = false;
+  public loadingConnection: boolean = false;
 
   currentTime: Date = new Date();
   estadoClima: string = 'Cargando...';
@@ -60,6 +65,8 @@ export default class Layout implements OnInit {
   }
 
   obtenerSensor() {
+    this.loadingConnection = true;
+    this.isConnected = false;
     this.esp32Service.getSensorData().subscribe({
       next: (data) => {
         console.log(data);
@@ -69,15 +76,20 @@ export default class Layout implements OnInit {
           detail: 'La conexión se reailzó con exito',
           life: 3000,
         });
-
+        this.isConnected = true;
+        this.loadingConnection = false;
         this.temperaturaSensor = data.temperatura;
         this.humedadSensor = data.humedad;
       },
       error: (err) => {
+        this.loadingConnection = false;
+
+        this.isConnected = false;
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'No se pude conectar',
+          detail:
+            'No se pude conectar, asegurate de estar conectado a la misma red de la casa',
           life: 3000,
         });
       },

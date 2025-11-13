@@ -1,34 +1,55 @@
 <div class="flex flex-col w-full h-screen">
   <div
-    class="w-full flex poppins-medium items-center text-xl text-gray-700 px-3 py-4"
+    class="w-full flex poppins-medium items-center text-xl dark:text-gray-300 text-gray-700 px-3 py-4"
   >
     Bienvenido a casa 🏡
   </div>
   <div
-    class="w-full flex py-3 px-3 my-3 justify-between items-center border-gray-300"
-    style="border-width: 1px"
+    class="w-full flex py-3 px-3 my-3 justify-between items-center dark:border-gray-700 border-gray-300"
+    style="border-top-width: 1px; border-bottom-width: 1px"
   >
     <p-button
       [text]="true"
       severity="contrast"
-      icon="pi pi-bars text-gray-500"
+      icon="pi pi-bars dark:text-gray-300 text-gray-500"
       [rounded]="true"
       styleClass=""
     />
     <div class="flex justify-between gap-5">
       <div class="flex items-center gap-2">
-        <i class="pi pi-clock text-gray-500"></i>
-        <div class="text-gray-500 text-sm poppins-regular">
+        <i class="pi pi-clock dark:text-gray-300 text-gray-500"></i>
+        <div class="dark:text-gray-300 text-gray-500 text-sm poppins-regular">
           {{ currentTime | date:'HH:mm':'GMT-4' }}
         </div>
       </div>
       <div
-        class="flex items-center gap-2 p-1 rounded-lg hover:cursor-pointer"
+        class="flex items-center gap-2 py-1 px-2 rounded-lg dark:border-none border-gray-300 dark:bg-gray-800/70 hover:cursor-pointer"
         style="border-width: 1px"
+        (click)="obtenerSensor()"
       >
-        <i class="pi pi-wifi text-gray-500"></i>
-        <div class="text-gray-500 text-xs poppins-regular">Conectado</div>
+        @if (loadingConnection) {
+        <i class="pi pi-spin pi-spinner dark:text-gray-300 text-gray-500"></i>
+        <div class="dark:text-gray-300 text-gray-500 text-xs poppins-regular">
+          Conectando...
+        </div>
+        } @else { @if (isConnected) {
+        <i class="pi pi-wifi dark:text-gray-300 text-gray-500"></i>
+        <div class="dark:text-gray-300 text-gray-500 text-xs poppins-regular">
+          Conectado
+        </div>
+        } @else {
+        <i class="pi pi-ban dark:text-red-300 text-red-500"></i>
+        <div class="dark:text-red-300 text-red-500 text-xs poppins-regular">
+          Error de conexión
+        </div>
+        } }
       </div>
+      <p-button
+        [icon]="themeService.isDarkMode() ? 'pi pi-moon' : 'pi pi-sun'"
+        severity="secondary"
+        [styleClass]="themeService.isDarkMode() ? '' : 'bg-white border-gray-300 hover:bg-gray-50'"
+        (onClick)="themeService.toggleDarkMode()"
+      />
       <!-- <div
         class="flex items-center gap-2 p-1 rounded-lg"
         style="border-width: 1px;"
@@ -66,20 +87,30 @@
 
     <div class="grid gap-4 my-4 grid-cols-2">
       <div
-        class="flex flex-col justify-between border-gray-300 gap-3 w-full p-4 rounded-xl"
+        class="flex flex-col justify-between border-gray-300 dark:border-none dark:bg-gray-800/50 gap-3 w-full p-4 rounded-xl"
         style="border-width: 1px"
       >
         <div class="flex w-full items-center justify-between">
           <i class="pi pi-sun text-yellow-500"></i>
           <div class="p-1 rounded-lg" style="border-width: 1px">
-            <div class="text-gray-500 text-xs poppins-regular">Confortable</div>
+            <div
+              class="dark:dark:text-gray-300 text-gray-500 text-xs poppins-regular"
+            >
+              Comfortable
+            </div>
           </div>
         </div>
-        <div class="poppins-regular text-xs text-gray-500">Temperatura</div>
-        <div class="poppins-regular text-xl text-gray-800">{{ temperaturaSensor }} °C</div>
+        <div
+          class="poppins-regular text-xs dark:dark:text-gray-300 text-gray-500"
+        >
+          Temperatura
+        </div>
+        <div class="poppins-regular text-xl dark:text-gray-300 text-gray-800">
+          {{ temperaturaSensor }} °C
+        </div>
       </div>
       <div
-        class="flex flex-col justify-between border-gray-300 gap-3 w-full p-4 rounded-xl"
+        class="flex flex-col justify-between border-gray-300 dark:border-none dark:bg-gray-800/50 gap-3 w-full p-4 rounded-xl"
         style="border-width: 1px"
       >
         <div class="flex w-full items-center justify-between">
@@ -88,11 +119,21 @@
             class="flex items-center gap-2 p-1 rounded-lg"
             style="border-width: 1px"
           >
-            <div class="text-gray-500 text-xs poppins-regular">Conectado</div>
+            <div
+              class="dark:dark:text-gray-300 text-gray-500 text-xs poppins-regular"
+            >
+              Conectado
+            </div>
           </div>
         </div>
-        <div class="poppins-regular text-xs text-gray-500">Humedad</div>
-        <div class="poppins-regular text-xl text-gray-800">{{ humedadSensor }}%</div>
+        <div
+          class="poppins-regular text-xs dark:dark:text-gray-300 text-gray-500"
+        >
+          Humedad
+        </div>
+        <div class="poppins-regular text-xl dark:text-gray-300 text-gray-800">
+          {{ humedadSensor }}%
+        </div>
       </div>
     </div>
 
@@ -292,4 +333,4 @@
     /> -->
   </div>
 </div>
- <p-toast position="top-center"/>
+<p-toast position="top-center" />

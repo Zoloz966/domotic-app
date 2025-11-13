@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class Esp32Service {
 
   // Cambia esta IP si tu ESP32 usa otra
-  private baseUrl = 'http://192.168.4.1';  
+  private baseUrl = 'http://192.168.1.25';
 
   constructor(private http: HttpClient) { }
 
@@ -26,5 +26,5 @@ export class Esp32Service {
     return this.http.get<{ status: string }>(`${this.baseUrl}/abrir`);
   }
 
-  
+
 }
